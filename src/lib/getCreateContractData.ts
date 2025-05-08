@@ -41,7 +41,7 @@ const tokenAbi = [
 const getCreateContractData = (defaultAdmin: Address) => {
   // Collection details
   const contractUri = "ar://contractUri"; // Your contract metadata URI
-  const collectionName = "My NFT Collection"; // Your collection name
+  const collectionName = "My Art Collection"; // Your collection name
 
   // Royalty configuration
   const royaltyConfig = {

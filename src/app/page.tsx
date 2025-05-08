@@ -58,9 +58,7 @@ function App() {
             sendTransactionAsync({
               to: "0x6832A997D8616707C7b68721D6E9332E77da7F6C",
               value: parseEther("0"),
-              data: getCreateContractData(
-                "0x279B3513b19275A547D343f671132C4eFF87002A" as Address
-              ),
+              data: getCreateContractData(account.addresses?.[0] as Address),
             })
           }
         >

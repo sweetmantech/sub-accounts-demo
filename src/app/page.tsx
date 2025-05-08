@@ -1,6 +1,7 @@
 "use client";
 
-import { parseEther } from "viem";
+import getCreateContractData from "@/lib/getCreateContractData";
+import { Address, parseEther } from "viem";
 import {
   useAccount,
   useConnect,
@@ -55,8 +56,11 @@ function App() {
           type="button"
           onClick={async () =>
             sendTransactionAsync({
-              to: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+              to: "0x6832A997D8616707C7b68721D6E9332E77da7F6C",
               value: parseEther("0"),
+              data: getCreateContractData(
+                "0x279B3513b19275A547D343f671132C4eFF87002A" as Address
+              ),
             })
           }
         >

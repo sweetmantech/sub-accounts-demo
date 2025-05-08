@@ -1,46 +1,12 @@
 import { Address, encodeFunctionData } from "viem";
-
-// ABI for the token contract (create function)
-const tokenAbi = [
-  {
-    inputs: [
-      { internalType: "string", name: "newContractURI", type: "string" },
-      { internalType: "string", name: "name", type: "string" },
-      {
-        components: [
-          {
-            internalType: "uint32",
-            name: "royaltyMintSchedule",
-            type: "uint32",
-          },
-          { internalType: "uint32", name: "royaltyBPS", type: "uint32" },
-          {
-            internalType: "address",
-            name: "royaltyRecipient",
-            type: "address",
-          },
-        ],
-        internalType: "struct ICreatorRoyaltiesControl.RoyaltyConfiguration",
-        name: "defaultRoyaltyConfiguration",
-        type: "tuple",
-      },
-      {
-        internalType: "address payable",
-        name: "defaultAdmin",
-        type: "address",
-      },
-      { internalType: "bytes[]", name: "setupActions", type: "bytes[]" },
-    ],
-    name: "createContract",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-] as const;
+import {
+  zoraCreator1155ImplABI as abi,
+  zoraCreator1155FactoryImplABI as factoryAbi,
+} from "@zoralabs/protocol-deployments";
 
 const getCreateContractData = (defaultAdmin: Address) => {
   // Collection details
-  const contractUri = "ar://contractUri"; // Your contract metadata URI
+  const contractUri = "ar://YD2R8yUf0AH9zWFkAxb9er_wEmcvydaB8X1GDSPrkW0"; // Your contract metadata URI
   const collectionName = "My Art Collection"; // Your collection name
 
   // Royalty configuration
@@ -50,18 +16,24 @@ const getCreateContractData = (defaultAdmin: Address) => {
     royaltyRecipient: defaultAdmin,
   };
 
+  const setupNewTokenData = encodeFunctionData({
+    abi,
+    functionName: "setupNewToken",
+    args: [contractUri, BigInt(100)],
+  });
+
   const args = [
     contractUri,
     collectionName,
     royaltyConfig,
     defaultAdmin, // defaultAdmin
-    [], // setupActions
+    [setupNewTokenData], // setupActions
   ] as const;
 
   console.log(args);
   // Encode the function call data
   const createContractData = encodeFunctionData({
-    abi: tokenAbi,
+    abi: factoryAbi,
     functionName: "createContract",
     args,
   });

@@ -1,21 +1,40 @@
 "use client";
 
 import getCreateContractData from "@/lib/getCreateContractData";
-import { Address, parseEther } from "viem";
+import { Address, parseEther, parseEventLogs } from "viem";
 import {
   useAccount,
   useConnect,
   useDisconnect,
   useSendTransaction,
+  useTransactionReceipt,
 } from "wagmi";
 import styles from "./page.module.css";
+import { zoraCreator1155FactoryImplABI as factoryAbi } from "@zoralabs/protocol-deployments";
 
 function App() {
   const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
+  const { connectors, connect, error } = useConnect();
   const { disconnect } = useDisconnect();
   const { sendTransactionAsync, data } = useSendTransaction();
+  const result = useTransactionReceipt({
+    hash: data,
+  });
+  const topics =
+    result?.data?.logs &&
+    parseEventLogs({
+      abi: factoryAbi,
+      logs: result?.data?.logs,
+      eventName: "SetupNewContract",
+    });
+
+  const newArtCollection = topics?.[0]?.args?.newContract;
   const isConnected = account.status === "connected";
+
+  console.log("DATA", data);
+  console.log("result", result);
+  console.log("topics", topics);
+  console.log("newArtCollection", newArtCollection);
 
   return (
     <main className={styles.main}>
@@ -89,6 +108,36 @@ function App() {
               {data && "Art collection created successfully! 🎉"}
             </div>
             <div className={styles.data}>{data}</div>
+            {data && newArtCollection && (
+              <a
+                className={styles.button}
+                href={`https://testnet.zora.co/collect/bsep:${newArtCollection}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  textAlign: "center",
+                  display: "inline-block",
+                  marginTop: "0.5rem",
+                }}
+              >
+                View on Zora
+              </a>
+            )}
+            {data && newArtCollection && (
+              <a
+                className={styles.button}
+                href={`https://inprocess.fun/collect/bsep:${newArtCollection}/1`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  textAlign: "center",
+                  display: "inline-block",
+                  marginTop: "0.5rem",
+                }}
+              >
+                View on In Process
+              </a>
+            )}
           </div>
         )}
       </section>

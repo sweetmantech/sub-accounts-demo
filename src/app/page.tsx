@@ -31,11 +31,6 @@ function App() {
   const newArtCollection = topics?.[0]?.args?.newContract;
   const isConnected = account.status === "connected";
 
-  console.log("DATA", data);
-  console.log("result", result);
-  console.log("topics", topics);
-  console.log("newArtCollection", newArtCollection);
-
   return (
     <main className={styles.main}>
       <section className={styles.card}>

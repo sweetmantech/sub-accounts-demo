@@ -1,0 +1,129 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  background: var(--background, #181818);
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+  padding: 2rem 1.5rem;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.addressList {
+  word-break: break-all;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.label {
+  font-weight: 500;
+  color: #7dd3fc;
+  margin-right: 0.5em;
+}
+
+.button {
+  background: linear-gradient(90deg, #2563eb 0%, #7dd3fc 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
+  margin-top: 0.5rem;
+}
+.button:hover {
+  background: linear-gradient(90deg, #1e40af 0%, #38bdf8 100%);
+}
+
+.connectors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.status {
+  font-size: 0.95rem;
+  color: #38bdf8;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+
+.divider {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin: 1rem 0;
+}
+
+.txSection, .signSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.txLabel {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #7dd3fc;
+}
+
+.success {
+  color: #22c55e;
+  font-size: 0.97rem;
+}
+
+.data {
+  word-break: break-all;
+  font-size: 0.92rem;
+  color: #a3a3a3;
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 1rem 0.25rem;
+    gap: 1.25rem;
+  }
+  .card {
+    padding: 1.25rem 0.75rem;
+    max-width: 100%;
+    border-radius: 0.75rem;
+  }
+  .heading {
+    font-size: 1.1rem;
+  }
+  .button {
+    font-size: 0.97rem;
+    padding: 0.6rem 1rem;
+  }
+} 

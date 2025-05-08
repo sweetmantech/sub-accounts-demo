@@ -7,7 +7,6 @@ import {
   useConnect,
   useDisconnect,
   useSendTransaction,
-  useSignMessage,
 } from "wagmi";
 import styles from "./page.module.css";
 
